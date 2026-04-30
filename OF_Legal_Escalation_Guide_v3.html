@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OF Legal Escalation Guide</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg:#ffffff; --bg2:#f8f9fa; --bg3:#f1f3f5; --border:#dee2e6; --border2:#ced4da;
+    --text:#1a1a2e; --text2:#6c757d; --text3:#adb5bd;
+    --blue:#1971c2; --blue-bg:#e7f5ff; --blue-bd:#74c0fc; --blue-tx:#1864ab;
+    --green:#2f9e44; --green-bg:#ebfbee; --green-bd:#8ce99a; --green-tx:#1e7e34;
+    --red:#c92a2a; --red-bg:#fff5f5; --red-bd:#ffa8a8; --red-tx:#c92a2a;
+    --orange:#e67700; --orange-bg:#fff9db; --orange-bd:#ffd43b; --orange-tx:#835900;
+    --radius:8px; --radius-lg:12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:#1a1b1e; --bg2:#25262b; --bg3:#2c2e33; --border:#373a40; --border2:#495057;
+      --text:#e0d0f0; --text2:#909296; --text3:#5c5f66;
+      --blue:#4dabf7; --blue-bg:#1c3a5e; --blue-bd:#1971c2; --blue-tx:#74c0fc;
+      --green:#51cf66; --green-bg:#1a3a22; --green-bd:#2f9e44; --green-tx:#8ce99a;
+      --red:#ff6b6b; --red-bg:#3b1219; --red-bd:#c92a2a; --red-tx:#ffa8a8;
+      --orange:#ffd43b; --orange-bg:#3b2e00; --orange-bd:#e67700; --orange-tx:#ffd43b;
+    }
+  }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:14px; color:var(--text); background:var(--bg3); min-height:100vh; padding:1.5rem 1rem; line-height:1.5; }
+  .container { max-width:640px; margin:0 auto; }
+  .top-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; gap:12px; flex-wrap:wrap; }
+  .top-bar-title { font-size:13px; font-weight:600; color:#9B1F9B; letter-spacing:.03em; }
+  .bc { display:flex; align-items:center; gap:5px; font-size:11px; color:var(--text2); flex-wrap:wrap; }
+  .bc-i { cursor:pointer; color:var(--text2); } .bc-i:hover { color:var(--text); text-decoration:underline; }
+  .bc-i.now { color:var(--text); font-weight:600; cursor:default; text-decoration:none; } .bc-sep { opacity:.4; }
+  .card { background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; margin-bottom:1rem; }
+  .screen { display:none; } .screen.active { display:block; }
+  .eyebrow { font-size:11px; font-weight:600; letter-spacing:.07em; text-transform:uppercase; color:#9B1F9B; margin-bottom:1rem; }
+  .q-line { font-size:15px; font-weight:600; line-height:1.6; color:var(--text); } .q-line+.q-line { margin-top:.1rem; }
+  .intro-answer { font-size:15px; font-weight:600; color:var(--text); margin:1rem 0 .35rem; }
+  .intro-sub { font-size:13px; color:var(--text2); line-height:1.7; }
+  .divider { height:1px; background:var(--border); margin:1.25rem 0; }
+  .dd-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:1.25rem; }
+  .dos  { padding:10px 12px; border-radius:var(--radius); border:1px solid var(--green-bd); background:var(--green-bg); }
+  .donts{ padding:10px 12px; border-radius:var(--radius); border:1px solid var(--red-bd);   background:var(--red-bg); }
+  .dd-hdr { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:7px; }
+  .dd-i { font-size:12px; line-height:1.6; padding-left:12px; position:relative; } .dd-i+.dd-i { margin-top:2px; }
+  .dd-i::before { content:''; position:absolute; left:0; top:7px; width:5px; height:5px; border-radius:50%; }
+  .dos  .dd-i { color:var(--green-tx); } .dos  .dd-i::before { background:var(--green); opacity:.6; }
+  .donts .dd-i { color:var(--red-tx);  } .donts .dd-i::before { background:var(--red);   opacity:.6; }
+  .who-title { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; color:#9B1F9B; margin-bottom:.4rem; }
+  .who-body  { font-size:13px; color:var(--text2); line-height:1.6; margin-bottom:1.25rem; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:9px 16px; font-size:13px; font-weight:600; font-family:inherit; border-radius:var(--radius); border:1px solid var(--border2); background:var(--bg); color:var(--text); cursor:pointer; transition:background .12s,border-color .12s; text-decoration:none; white-space:nowrap; }
+  .btn:hover { background:var(--bg2); border-color:var(--text3); } .btn:active { transform:scale(.98); }
+  .btn-primary { background:linear-gradient(135deg,#C71CA8,#6B2FA9); color:#fff; border-color:#9B1F9B; } .btn-primary:hover { opacity:.9; background:linear-gradient(135deg,#B71FA8,#5B2299); }
+  .btn-full { width:100%; }
+  .btn-success { background:var(--green-bg); color:var(--green-tx); border-color:var(--green-bd); } .btn-success:hover { background:var(--green-bd); }
+  .btn-sm { padding:6px 12px; font-size:12px; }
+  .nav-row { display:flex; gap:8px; margin-top:1rem; } .nav-row .btn { flex:1; }
+  .q-step  { font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:#9B1F9B; margin-bottom:.4rem; }
+  .q-title { font-size:18px; font-weight:600; line-height:1.4; margin-bottom:.3rem; }
+  .q-sub   { font-size:13px; color:var(--text2); line-height:1.6; margin-bottom:1.25rem; }
+  .choices { display:flex; flex-direction:column; gap:8px; margin-bottom:1.25rem; }
+  .ch { display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border:1px solid var(--border); border-radius:var(--radius-lg); cursor:pointer; transition:border-color .12s,background .12s; background:var(--bg); }
+  .ch:hover { border-color:var(--border2); background:var(--bg2); } .ch.sel { border-color:var(--blue-bd); background:var(--blue-bg); }
+  .ch-ico { width:32px; height:32px; min-width:32px; border-radius:var(--radius); background:var(--bg2); display:flex; align-items:center; justify-content:center; font-size:15px; margin-top:1px; }
+  .ch.sel .ch-ico { background:var(--blue-bg); }
+  .ch-lbl  { font-size:14px; font-weight:600; line-height:1.3; margin-bottom:2px; }
+  .ch-desc { font-size:12px; color:var(--text2); line-height:1.4; } .ch.sel .ch-desc { color:var(--blue-tx); }
+  .ch-dashed { border-style:dashed; }
+  .alert-danger  { padding:10px 14px; border-radius:var(--radius); border:1px solid var(--red-bd);    background:var(--red-bg);    font-size:13px; color:var(--red-tx);    margin-bottom:1rem; line-height:1.5; font-weight:600; }
+  .alert-info    { padding:10px 14px; border-radius:var(--radius); border:1px solid var(--blue-bd);   background:var(--blue-bg);   font-size:13px; color:var(--blue-tx);   margin-bottom:1rem; line-height:1.5; }
+  .alert-warning { padding:10px 14px; border-radius:var(--radius); border:1px solid var(--orange-bd); background:var(--orange-bg); font-size:13px; color:var(--orange-tx); margin-bottom:1.25rem; line-height:1.5; }
+  .pbar { height:4px; background:var(--border); border-radius:2px; overflow:hidden; margin-bottom:1.5rem; }
+  .pbar-f { height:100%; background:linear-gradient(90deg,#6B2FA9,#C71CA8); border-radius:2px; transition:width .35s; }
+  .step-wrap { border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; margin-bottom:12px; }
+  .step-hdr { padding:11px 16px; display:flex; align-items:center; gap:10px; background:linear-gradient(90deg,#f9f0ff,#fdf0fc); }
+  .snum { width:24px; height:24px; min-width:24px; border-radius:50%; background:var(--bg3); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:600; color:var(--text2); transition:all .2s; }
+  .snum.active { background:linear-gradient(135deg,#C71CA8,#6B2FA9); color:#fff; } .snum.done { background:var(--green); color:#fff; }
+  .step-title { font-size:14px; font-weight:600; flex:1; line-height:1.3; }
+  .step-sub   { font-size:12px; color:var(--text2); margin-top:1px; }
+  .step-ct    { font-size:11px; font-weight:600; color:var(--text2); white-space:nowrap; } .step-ct.ok { color:var(--green-tx); }
+  .step-body  { border-top:1px solid var(--border); } .ci-wrap { padding:0 16px; }
+  .ci { border-bottom:1px solid var(--border); cursor:pointer; } .ci:last-child { border-bottom:none; }
+  .ci-top { display:flex; gap:10px; padding:11px 0 6px; } .ci:hover .ci-box { border-color:var(--border2); }
+  .ci.ck .ci-lbl { color:var(--green-tx); }
+  .ci-box { width:16px; height:16px; min-width:16px; border:2px solid var(--border2); border-radius:3px; margin-top:2px; display:flex; align-items:center; justify-content:center; transition:all .12s; flex-shrink:0; }
+  .ci.ck .ci-box { background:var(--green); border-color:var(--green); }
+  .ci-tick { display:none; } .ci.ck .ci-tick { display:block; }
+  .ci-lbl { font-size:13px; font-weight:600; line-height:1.4; }
+  .expand-hint { font-size:11px; color:#1971c2; margin-top:2px; padding-bottom:4px; cursor:pointer; text-decoration:underline; text-underline-offset:2px; }
+  .ci.ck .expand-hint { display:none; }
+  .ci-body { padding:0 0 11px 26px; display:none; } .ci-body.open { display:block; }
+  .ci-why  { font-size:12px; color:var(--text2); line-height:1.6; margin-bottom:6px; }
+  .ci-good { font-size:12px; line-height:1.5; padding:7px 10px; border-radius:var(--radius); background:var(--green-bg); color:var(--green-tx); margin-bottom:5px; }
+  .ci-bad  { font-size:12px; line-height:1.5; padding:7px 10px; border-radius:var(--radius); background:var(--red-bg); color:var(--red-tx); }
+  .nudge { border:1px solid var(--green-bd); background:var(--green-bg); border-radius:var(--radius-lg); padding:16px; margin-top:1rem; display:none; }
+  .nudge.show { display:block; }
+  .nudge-t { font-size:15px; font-weight:600; color:var(--green-tx); margin-bottom:5px; }
+  .nudge-b { font-size:13px; color:var(--green-tx); opacity:.85; line-height:1.5; margin-bottom:12px; }
+  .fraud-hatch { border:1px solid var(--orange-bd); background:var(--orange-bg); border-radius:var(--radius); padding:12px 14px; margin:12px 0 4px; display:none; }
+  .fraud-hatch.show { display:block; }
+  .fraud-hatch p { font-size:12px; color:var(--orange-tx); line-height:1.6; margin-bottom:8px; }
+  .rc { border:1px solid var(--border); border-radius:var(--radius-lg); padding:12px 14px; margin-bottom:8px; background:var(--bg); }
+  .rc-t { font-size:14px; font-weight:600; margin-bottom:3px; color:var(--text); }
+  .rc-d { font-size:12px; color:var(--text2); line-height:1.5; }
+  .rc-r { margin-top:7px; font-size:12px; font-weight:600; color:var(--text); }
+  .cr { display:flex; justify-content:space-between; align-items:baseline; padding:6px 0; border-bottom:1px solid var(--border); font-size:13px; gap:8px; flex-wrap:wrap; } .cr:last-child { border-bottom:none; }
+  .cr-name  { font-weight:600; color:var(--text); } .cr-email { font-size:12px; color:var(--text2); }
+  .contacts-section { margin-top:1rem; border-top:1px solid var(--border); padding-top:1rem; }
+  .contacts-label { font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:#9B1F9B; margin-bottom:.5rem; }
+  .tpl-header { background:linear-gradient(135deg,#821E8E,#C71CA8); padding:14px 18px; border-radius:var(--radius-lg) var(--radius-lg) 0 0; }
+  .tpl-header-lbl { font-size:10px; color:rgba(255,255,255,.5); font-weight:600; letter-spacing:.07em; text-transform:uppercase; margin-bottom:2px; }
+  .tpl-header-val { font-size:13px; color:#fff; font-weight:600; margin-bottom:8px; } .tpl-header-val:last-child { margin-bottom:0; }
+  .tpl-body { padding:14px 18px; border:1px solid var(--border); border-top:none; border-radius:0 0 var(--radius-lg) var(--radius-lg); background:var(--bg); margin-bottom:1rem; }
+  .tpl-row { display:flex; gap:12px; padding:7px 0; border-bottom:1px solid var(--border); font-size:13px; } .tpl-row:last-child { border-bottom:none; }
+  .tpl-lbl { width:150px; min-width:150px; font-size:11px; color:#9B1F9B; padding-top:2px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; }
+  .tpl-val { flex:1; color:var(--text2); font-style:italic; } .tpl-val.prefilled { color:var(--text); font-style:normal; font-weight:600; }
+  .dont-box { border:1px solid var(--red-bd); border-radius:var(--radius-lg); padding:12px 14px; margin-bottom:1rem; background:var(--red-bg); }
+  .dont-box-hdr  { font-size:12px; font-weight:600; color:var(--red-tx); margin-bottom:6px; }
+  .dont-box-list { font-size:12px; color:var(--red-tx); line-height:1.9; opacity:.9; }
+  .page-footer { text-align:center; font-size:11px; color:var(--text3); margin-top:2rem; padding-bottom:1rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div style="background:linear-gradient(135deg,#6B2FA9,#C71CA8,#B1168C);border-radius:12px;padding:14px 20px;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+    <div style="color:#fff;font-size:15px;font-weight:700;letter-spacing:.02em;">Oneforma</div>
+    <div style="color:rgba(255,255,255,.8);font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;">Legal Escalation Guide &nbsp;&middot;&nbsp; Internal</div>
+  </div>
+
+  <div class="top-bar">
+    <div class="top-bar-title">Oneforma &middot; Legal Escalation Guide</div>
+    <div class="bc" id="global-bc"></div>
+    <button class="btn btn-sm" onclick="nav('s-contacts')" style="font-size:11px;padding:5px 10px;color:#9B1F9B;border-color:#9B1F9B;">Contacts</button>
+  </div>
+
+  <!-- INTRO -->
+  <div class="screen active card" id="s-intro">
+    <div class="eyebrow">Oneforma &middot; Legal Escalation Guide &middot; v2.0 &middot; Internal</div>
+    <div class="questions">
+      <div class="q-line">Has a worker raised a dispute you&rsquo;re not sure how to handle?</div>
+      <div class="q-line">Received a notice and don&rsquo;t know if Legal needs to be involved?</div>
+      <div class="q-line">Ready to escalate but unsure what Legal actually needs from you?</div>
+    </div>
+    <div class="intro-answer">You&rsquo;re in the right place.</div>
+    <div class="intro-sub">This guide walks you through your specific situation step by step. Answer a few quick questions, tick through a short checklist, and you&rsquo;ll arrive at a ready-to-send email. The whole thing takes minutes.</div>
+    <div class="divider"></div>
+    <div class="dd-row">
+      <div class="dos">
+        <div class="dd-hdr" style="color:var(--green-tx)">Do</div>
+        <div class="dd-i">Contact Fraud before Legal if fraud is suspected</div>
+        <div class="dd-i">State specifically what you need Legal to do</div>
+        <div class="dd-i">Attach documents as separate files, not email chains</div>
+      </div>
+      <div class="donts">
+        <div class="dd-hdr" style="color:var(--red-tx)">Don&rsquo;t</div>
+        <div class="dd-i">Escalate verbally &mdash; always use email</div>
+        <div class="dd-i">Send a government notice through the normal flow</div>
+        <div class="dd-i">Escalate without completing this checklist first</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="who-title">Who is this for?</div>
+    <div class="who-body">Vendor and Workforce Managers, Project and Programme Managers, Community Support Team Leads, and Operations staff &mdash; anyone at Oneforma who may need to initiate a legal escalation.</div>
+    <button class="btn btn-primary btn-full" onclick="nav('s-start')">Let&rsquo;s get started &rarr;</button>
+  </div>
+
+  <!-- CASE TYPE -->
+  <div class="screen" id="s-start">
+    <div class="card">
+      <div class="q-step">Step 1 of 4</div>
+      <div class="q-title">What are you dealing with?</div>
+      <div class="q-sub">Pick the closest match. Only the steps relevant to your situation will appear.</div>
+      <div class="choices">
+        <div class="ch" onclick="startCase('nonpayment',this)">
+          <div class="ch-ico">$</div>
+          <div><div class="ch-lbl">Non-payment or payment dispute</div><div class="ch-desc">Freelancer claims unpaid; Centific refusing payment due to fraud or ToS breach</div></div>
+        </div>
+        <div class="ch" onclick="startCase('govtnotice',this)">
+          <div class="ch-ico">&#9888;</div>
+          <div><div class="ch-lbl">Government agency complaint</div><div class="ch-desc">TWC, DOL, or state labor board notice received</div></div>
+        </div>
+        <div class="ch" onclick="startCase('clientdispute',this)">
+          <div class="ch-ico">&#9878;</div>
+          <div><div class="ch-lbl">Contractor or client dispute</div><div class="ch-desc">Contract breach claims, SOW disagreements, client-level disputes</div></div>
+        </div>
+        <div class="ch" onclick="startCase('tos',this)">
+          <div class="ch-ico">&#9873;</div>
+          <div><div class="ch-lbl">Terms of Service violation</div><div class="ch-desc">Suspected fraud, identity misuse, policy breach requiring formal action</div></div>
+        </div>
+        <div class="ch" onclick="startCase('dsar',this)">
+          <div class="ch-ico">&#128274;</div>
+          <div><div class="ch-lbl">Data privacy or DSAR</div><div class="ch-desc">Deletion requests, access requests, privacy complaints</div></div>
+        </div>
+        <div class="ch" onclick="startCase('thirdparty',this)">
+          <div class="ch-ico">&#9993;</div>
+          <div><div class="ch-lbl">Third-party legal notice</div><div class="ch-desc">Subpoenas, cease-and-desist letters, external counsel contact</div></div>
+        </div>
+        <div class="ch ch-dashed" onclick="nav('s-notlegal')">
+          <div class="ch-ico">?</div>
+          <div><div class="ch-lbl">Not sure &mdash; or it may not be a legal matter</div><div class="ch-desc">Platform access issues, payment processing delays, onboarding questions, general policy clarifications</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn" onclick="nav('s-intro')">&larr; Back</button></div>
+  </div>
+
+  <!-- NOT LEGAL -->
+  <div class="screen" id="s-notlegal">
+    <div class="card">
+      <div class="q-title">This doesn&rsquo;t need to go to Legal</div>
+      <div class="q-sub">Route it to the right team. Sending non-legal issues to Legal delays both Legal&rsquo;s work and the person who needs help.</div>
+      <div class="rc">
+        <div class="rc-t">Platform access issues</div>
+        <div class="rc-d">Login problems, account access, permissions, tool access &mdash; anything where a worker can&rsquo;t get into the platform.</div>
+        <div class="rc-r">&rarr; Community Support</div>
+      </div>
+      <div class="rc">
+        <div class="rc-t">Payment processing delays</div>
+        <div class="rc-d">A payment is late but no formal claim has been filed, no fraud indicator exists, and no agency is involved. If any of those change, return here and select the correct case type.</div>
+        <div class="rc-r">&rarr; Community Support or Operations</div>
+      </div>
+      <div class="rc">
+        <div class="rc-t">Onboarding questions</div>
+        <div class="rc-d">How to join the platform, documentation requirements, getting started, platform orientation.</div>
+        <div class="rc-r">&rarr; Community Support</div>
+      </div>
+      <div class="rc">
+        <div class="rc-t">General policy clarifications</div>
+        <div class="rc-d">How a rule works, what a policy means, the correct procedure for a given situation.</div>
+        <div class="rc-r">&rarr; Operations</div>
+      </div>
+      <div class="rc">
+        <div class="rc-t">Worker complaint &mdash; no formal claim yet</div>
+        <div class="rc-d">If the worker later files a formal claim, engages a lawyer, or a government agency becomes involved &mdash; return here and select the correct case type.</div>
+        <div class="rc-r">&rarr; Community Support for now</div>
+      </div>
+      <div class="contacts-section">
+        <div class="contacts-label">Contacts</div>
+        <div class="cr"><span class="cr-name">Anya Vlasenko &mdash; Head of Community Support</span><span class="cr-email">anya.vlasenko@centific.com</span></div>
+        <div class="cr"><span class="cr-name">Andrijana Rovinac &mdash; Community Support Team Lead</span><span class="cr-email">andrijana.rovinac@centific.com</span></div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn" onclick="nav('s-start')">&larr; Back</button></div>
+  </div>
+
+
+
+  <!-- FRAUD QUESTION -->
+  <div class="screen" id="s-fraud-q">
+    <div class="card">
+      <div class="q-step">Step 2 of 4</div>
+      <div class="q-title">Any fraud indicators in this case?</div>
+      <div class="q-sub">This includes: suspected fraud, ToS violations, account anomalies, or non-payment tied to work quality concerns &mdash; even if the primary case type is not fraud.</div>
+      <div class="alert-warning">If unsure, choose yes. The Fraud team will confirm whether their involvement is needed. Escalating to Legal without Fraud team input where fraud is suspected is one of the most common reasons escalations are returned.</div>
+      <div class="choices">
+        <div class="ch" onclick="pickFraud('yes',this)">
+          <div class="ch-ico">&#9888;</div>
+          <div><div class="ch-lbl">Yes &mdash; there are fraud or suspicious activity indicators</div><div class="ch-desc">The Fraud pre-check will be added as the first step in your checklist</div></div>
+        </div>
+        <div class="ch" onclick="pickFraud('no',this)">
+          <div class="ch-ico">&#10003;</div>
+          <div><div class="ch-lbl">No &mdash; no fraud indicators, straightforward case</div><div class="ch-desc">Proceed directly to the checklist</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn" onclick="nav('s-start')">&larr; Back</button></div>
+  </div>
+
+  <!-- PLATFORM QUESTION -->
+  <div class="screen" id="s-platform-q">
+    <div class="card">
+      <div class="q-step">Step 3 of 4</div>
+      <div class="q-title">Where is the project hosted?</div>
+      <div class="q-sub">This determines how you gather technical evidence. The two paths require completely different actions.</div>
+      <div class="choices">
+        <div class="ch" onclick="pickPlatform('internal',this)">
+          <div class="ch-ico">&#9670;</div>
+          <div><div class="ch-lbl">Project on Oneforma &mdash; internal platform</div><div class="ch-desc">Evidence is requested via a Jira ticket to the Development team</div></div>
+        </div>
+        <div class="ch" onclick="pickPlatform('client',this)">
+          <div class="ch-ico">&#9671;</div>
+          <div><div class="ch-lbl">Project on client tools &mdash; external platform</div><div class="ch-desc">User activity data is collected directly from the client&rsquo;s platform</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn" onclick="navBack()">&larr; Back</button></div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="screen" id="s-checklist">
+    <div class="card" style="padding-bottom:.5rem">
+      <div class="q-step">Step 4 of 4 &mdash; tap any item to expand full guidance</div>
+      <div class="pbar"><div class="pbar-f" id="cl-prog" style="width:0%"></div></div>
+      <div id="cl-body"></div>
+      <div class="nudge" id="nudge">
+        <div class="nudge-t">You&rsquo;re ready to escalate</div>
+        <div class="nudge-b">Every requirement is met. The email template has your subject line, recipients, and all required fields pre-structured. Fill in your specifics and send. Legal&rsquo;s SLA starts from the moment they receive a complete submission.</div>
+        <button class="btn btn-success btn-full" onclick="goTemplate()">Open email template &rarr;</button>
+      </div>
+    </div>
+    <div class="nav-row"><button class="btn" onclick="navBack()">&larr; Back</button><button class="btn" onclick="nav('s-start')">Start again</button></div>
+  </div>
+
+  <!-- EMAIL TEMPLATE -->
+  <div class="screen" id="s-template">
+    <div class="alert-info">Fields in <em>italics</em> need your input. <strong>Bold fields</strong> are pre-filled from your answers. Attach all documents before sending.</div>
+    <div class="tpl-header">
+      <div class="tpl-header-lbl">To</div>
+      <div class="tpl-header-val">legal@centific.com &nbsp;&middot;&nbsp; CC: judy.huang@centific.com</div>
+      <div class="tpl-header-lbl">Subject</div>
+      <div class="tpl-header-val" id="tpl-subject"></div>
+    </div>
+    <div class="tpl-body" id="tpl-fields"></div>
+    <div class="nav-row"><button class="btn" onclick="nav('s-checklist')">&larr; Back to checklist</button><button class="btn" onclick="nav('s-start')">Start again</button></div>
+  </div>
+
+  <!-- KEY CONTACTS -->
+  <div class="screen" id="s-contacts">
+    <div class="card">
+      <div class="q-title" style="margin-bottom:.25rem">Key contacts</div>
+      <div class="q-sub" style="margin-bottom:1rem">All legal escalation contacts in one place.</div>
+      <div class="contacts-label">Legal</div>
+      <div class="cr"><span class="cr-name">Legal Team</span><span class="cr-email">legal@centific.com &middot; CC judy.huang@centific.com</span></div>
+      <div style="margin-top:1rem"></div>
+      <div class="contacts-label">Fraud</div>
+      <div class="cr"><span class="cr-name">Jagadeeswari Mathi &mdash; Fraud Team Lead</span><span class="cr-email">mathi.jagadeeswari@centific.com</span></div>
+      <div class="cr"><span class="cr-name">Bojana Petrinovic &mdash; Head of Fraud</span><span class="cr-email">bojana.petrinovic@centific.com</span></div>
+      <div style="margin-top:1rem"></div>
+      <div class="contacts-label">Community Support</div>
+      <div class="cr"><span class="cr-name">Anya Vlasenko &mdash; Head of CS</span><span class="cr-email">anya.vlasenko@centific.com</span></div>
+      <div class="cr"><span class="cr-name">Andrijana Rovinac &mdash; CS Team Lead</span><span class="cr-email">andrijana.rovinac@centific.com</span></div>
+      <div style="margin-top:1rem"></div>
+      <div class="contacts-label">Data Privacy</div>
+      <div class="cr"><span class="cr-name">Julia Bacaria &mdash; Data Protection Officer</span><span class="cr-email">data_protection@centific.com &middot; CC v_julia.bacaria@centific.com</span></div>
+      <div style="margin-top:1rem"></div>
+      <div class="contacts-label">Technical Evidence</div>
+      <div class="cr"><span class="cr-name">Development Team</span><span class="cr-email">Jira &mdash; Dev queue</span></div>
+    </div>
+    <div class="nav-row"><button class="btn" onclick="navBack()">&larr; Back</button></div>
+  </div>
+
+  <div class="page-footer">OF Legal Escalation Guide &middot; v2.0 &middot; April 2026 &middot; Internal &mdash; not for external distribution</div>
+</div>
+
+<script>
+const ST={caseType:null,platform:null,fraud:null};
+const CK={};
+const LABELS={nonpayment:'Non-payment / payment dispute',govtnotice:'Government agency complaint',clientdispute:'Contractor / client dispute',tos:'Terms of Service violation',dsar:'Data privacy / DSAR',thirdparty:'Third-party legal notice'};
+const SLAS={nonpayment:'2 business days',govtnotice:'24 hours',clientdispute:'2 business days',tos:'1 business day',dsar:'48 hours (regulatory deadline)',thirdparty:'Same day'};
+const BC_LABELS={'s-intro':'Guide','s-start':'Case type','s-fraud-q':'Fraud check','s-platform-q':'Platform','s-checklist':'Checklist','s-template':'Template','s-notlegal':'Not a legal matter','s-contacts':'Key contacts'};
+let navHistory=['s-intro'];
+
+function nav(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(!navHistory.includes(id))navHistory.push(id);
+  else navHistory=navHistory.slice(0,navHistory.indexOf(id)+1);
+  renderBc();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function navBack(){
+  if(navHistory.length>1){
+    navHistory.pop();
+    const prev=navHistory[navHistory.length-1];
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(prev).classList.add('active');
+    renderBc();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+function navTo(id){navHistory=navHistory.slice(0,navHistory.indexOf(id)+1);nav(id);}
+function renderBc(){
+  const bc=document.getElementById('global-bc');
+  const show=navHistory.filter(id=>BC_LABELS[id]);
+  if(show.length<=1){bc.innerHTML='';return;}
+  bc.innerHTML=show.map((id,i)=>{
+    const last=i===show.length-1;
+    return(i?'<span class="bc-sep">&rsaquo;</span>':'')+`<span class="bc-i${last?' now':''}" ${!last?`onclick="navTo('${id}')"`:''}>${BC_LABELS[id]}</span>`;
+  }).join('');
+}
+
+function startCase(ct,el){
+  ST.caseType=ct;ST.platform=null;ST.fraud=null;
+  document.querySelectorAll('#s-start .ch').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  setTimeout(()=>{nav('s-fraud-q');},180);
+}
+function pickFraud(v,el){
+  ST.fraud=v;
+  document.querySelectorAll('#s-fraud-q .ch').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  setTimeout(()=>{
+    if(['nonpayment','clientdispute','tos'].includes(ST.caseType))nav('s-platform-q');
+    else{buildChecklist();nav('s-checklist');}
+  },180);
+}
+function pickPlatform(v,el){
+  ST.platform=v;
+  document.querySelectorAll('#s-platform-q .ch').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  setTimeout(()=>{buildChecklist();nav('s-checklist');},180);
+}
+
+function tick(id){
+  CK[id]=!CK[id];
+  const el=document.getElementById('ci_'+id);
+  if(el){el.classList.toggle('ck',CK[id]);if(CK[id]){const b=el.querySelector('.ci-body');if(b)b.classList.remove('open');}}
+  refreshStep(id.split('__')[0]);
+  refreshOverall();
+}
+function toggleExpand(id,e){
+  e.stopPropagation();
+  const el=document.getElementById('ci_'+id);
+  if(!el||el.classList.contains('ck'))return;
+  const b=el.querySelector('.ci-body');if(b)b.classList.toggle('open');
+}
+function refreshStep(sid){
+  const keys=Object.keys(CK).filter(k=>k.startsWith(sid+'__'));
+  const done=keys.filter(k=>CK[k]).length,total=keys.length;
+  const ct=document.getElementById('sc_'+sid),nu=document.getElementById('sn_'+sid);
+  if(ct){ct.textContent=done===total?'All done':done+' / '+total;ct.className='step-ct'+(done===total?' ok':'');}
+  if(nu)nu.className='snum'+(done===total?' done':done>0?' active':'');
+}
+function refreshOverall(){
+  const all=Object.keys(CK).length,done=Object.values(CK).filter(Boolean).length;
+  const bar=document.getElementById('cl-prog');
+  if(bar)bar.style.width=(all?Math.round(done/all*100):0)+'%';
+  const nudge=document.getElementById('nudge');
+  if(nudge)nudge.className='nudge'+(done===all&&all>0?' show':'');
+}
+
+function mkCI(sid,items){
+  return items.map(it=>{
+    const id=sid+'__'+it.id;CK[id]=false;
+    const has=it.why||it.good||it.bad;
+    return`<div class="ci" id="ci_${id}" onclick="tick('${id}')">
+      <div class="ci-top">
+        <div class="ci-box"><svg class="ci-tick" width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.5 6L8 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div style="flex:1"><div class="ci-lbl">${it.l}</div>${has?`<div class="expand-hint" onclick="toggleExpand('${id}',event)">Expand for guidance &#x25BE;</div>`:''}</div>
+      </div>
+      ${has?`<div class="ci-body">${it.why?`<div class="ci-why">${it.why}</div>`:''}${it.good?`<div class="ci-good">&#10003;&nbsp;${it.good}</div>`:''}${it.bad?`<div class="ci-bad">&#9888;&nbsp;${it.bad}</div>`:''}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function mkStep(num,sid,title,sub,items,extra){
+  return`<div class="step-wrap" id="step_${sid}">
+    <div class="step-hdr">
+      <div class="snum" id="sn_${sid}">${num}</div>
+      <div style="flex:1"><div class="step-title">${title}</div>${sub?`<div class="step-sub">${sub}</div>`:''}</div>
+      <div class="step-ct" id="sc_${sid}">0 / ${items.length}</div>
+    </div>
+    <div class="step-body"><div class="ci-wrap">${mkCI(sid,items)}${extra||''}</div></div>
+  </div>`;
+}
+
+function getFraudItems(){return[
+  {id:'f1',l:'Contact the Fraud Team Lead (Jagadeeswari Mathi) to report suspicious activity before escalating to Legal',
+    why:'The Fraud team collects and preserves fraud-specific evidence. Do not escalate to Legal without their input where fraud is suspected. This is one of the most common reasons escalations are returned.',
+    good:'Email mathi.jagadeeswari@centific.com with a clear description of the suspicious activity before contacting Legal.',
+    bad:'You mention the fraud concern in the Legal email and expect Legal to loop in Fraud themselves. They will not &mdash; this step must happen first.'},
+  {id:'f2',l:'Include Bojana Petrinovic (Head of Fraud) in CC on the fraud report',
+    why:'Bojana Petrinovic must be copied on all fraud cases for oversight and escalation decisions. This is a standing requirement, not optional.',
+    good:'bojana.petrinovic@centific.com is in CC on the email to the Fraud Team Lead.',
+    bad:'You email the Fraud Team Lead directly without copying the Head of Fraud.'},
+  {id:'f3',l:'Attach the Fraud team\'s findings to the Legal escalation email',
+    why:'The Fraud team\'s findings are a required attachment. Without them the escalation is incomplete and will be returned.',
+    good:'You have a written document or email from the Fraud team summarising their findings, ready to attach.',
+    bad:'You escalate to Legal saying "Fraud team is looking into it." Legal cannot act on a pending review.'},
+];}
+
+function injectFraudStep(){
+  const hatch=document.getElementById('fraud-hatch');
+  if(hatch)hatch.style.display='none';
+  if(document.getElementById('step_fraud'))return;
+  const html=mkStep(0,'fraud','Fraud pre-check &mdash; complete this before contacting Legal','The Fraud team collects and preserves fraud-specific evidence. Do not escalate to Legal without their input.',getFraudItems());
+  document.getElementById('cl-body').insertAdjacentHTML('afterbegin',html);
+  refreshOverall();
+}
+
+
+function buildChecklist(){
+  const ct=ST.caseType,pl=ST.platform,fr=ST.fraud;
+  Object.keys(CK).forEach(k=>delete CK[k]);
+
+  const urgentProtocolItems = (ct==='govtnotice') ? [
+    {id:'u1',l:'Forward the notice to legal@centific.com (CC: judy.huang@centific.com)',
+      why:'Regulatory bodies have strict response deadlines. If Legal misses them because the notice sat in your inbox, it creates serious legal exposure for Centific.',
+      good:'Forward the original notice as an email attachment within the hour of receiving it.',
+      bad:'You wait until the next morning, or respond to the agency yourself to buy time.'},
+    {id:'u2',l:'Attach the original notice exactly as received &mdash; do not annotate or alter it',
+      why:'Legal needs the notice in its original form to understand the agency\'s exact language, deadlines, and reference numbers.',
+      good:'The notice attached as a PDF or image exactly as it arrived &mdash; unedited.',
+      bad:'You summarise the notice in the email body, or write notes on it before scanning.'},
+    {id:'u3',l:'State the date and time you received the notice in your email body',
+      why:'The 24-hour SLA is measured from the moment of receipt, not from when you forward it. Legal needs to know when the clock started.',
+      good:'"Received via post on 28 April 2026 at approximately 10:00am."',
+      bad:'You omit the receipt time, making it impossible for Legal to confirm the regulatory deadline.'},
+    {id:'u4',l:'Wait for Legal to contact you with next steps &mdash; do not take any further action',
+      why:'From the moment you forward the notice, Legal owns all communication with the agency, the freelancer, and any other party.',
+      good:'You wait. If you have not heard back within a few hours, follow up directly with Judy Huang.',
+      bad:'You email the freelancer to let them know, or call the agency to acknowledge receipt.'},
+  ] : (ct==='thirdparty') ? [
+    {id:'u1',l:'Forward the notice to legal@centific.com (CC: judy.huang@centific.com)',
+      why:'External legal notices must reach Legal the same day they are received. Any delay can prejudice Centific\'s legal position.',
+      good:'Forward the original notice as an email attachment immediately, unchanged.',
+      bad:'You wait until the next day, or consult a colleague about how to respond before forwarding.'},
+    {id:'u2',l:'Attach the original notice exactly as received &mdash; do not annotate or alter it',
+      why:'Legal needs the notice in its original form to understand the exact language, demands, deadlines, and reference numbers.',
+      good:'The notice attached as a PDF or image exactly as it arrived &mdash; unedited.',
+      bad:'You summarise the notice in the email body, or add handwritten notes before scanning.'},
+    {id:'u3',l:'State the date and time you received the notice in your email body',
+      why:'The same-day SLA is measured from the moment of receipt. Legal needs to know when the clock started.',
+      good:'"Received via email on 28 April 2026 at approximately 2:30pm."',
+      bad:'You omit the receipt time, making it impossible for Legal to confirm the response window.'},
+    {id:'u4',l:'Wait for Legal to contact you with next steps &mdash; do not take any further action',
+      why:'From the moment you forward the notice, Legal owns all communication with the opposing party. Any independent action can waive rights or create new obligations.',
+      good:'You wait. If you have not heard back within a few hours, follow up directly with Judy Huang.',
+      bad:'You acknowledge receipt to the sender, or discuss the matter with the worker or client involved.'},
+  ] : [];
+
+  const escapeHatch=(fr!=='yes'&&['nonpayment','clientdispute'].includes(ct))
+    ?`<div class="fraud-hatch show" id="fraud-hatch">
+        <p><strong>Noticed something suspicious while preparing?</strong> Report any suspicious activity on the user&rsquo;s profile to the Fraud team before contacting Legal. This includes account anomalies, work quality concerns linked to the payment, or any behaviour that looks like a ToS violation. If yes, pause here &mdash; the Fraud pre-check must come first.</p>
+        <button class="btn btn-sm" onclick="injectFraudStep()">Add Fraud pre-check to my checklist &rarr;</button>
+      </div>`
+    :'';
+
+  let n=1,html='';
+  html+=`<div class="alert-info" style="margin-bottom:1rem"><strong>${LABELS[ct]}</strong> &nbsp;&middot;&nbsp; Legal&rsquo;s response SLA once they receive a complete submission: <strong>${SLAS[ct]}</strong></div>`;
+
+  if(ct==='govtnotice'){
+    html+=`<div class="alert-danger" style="margin-bottom:1rem">
+      <strong>24-hour SLA &mdash; act immediately.</strong> Forward the notice to Legal as fast as possible. Complete the checklist below, then send. Do NOT respond to the agency, communicate with the freelancer about the claim, or authorise any payment. Legal manages all agency communications.
+    </div>`;
+  }
+  if(ct==='thirdparty'){
+    html+=`<div class="alert-danger" style="margin-bottom:1rem">
+      <strong>Same-day SLA &mdash; act immediately.</strong> Forward the notice to Legal today. Complete the checklist below, then send. Do NOT respond to the notice or to external counsel, share any documents, or seek outside legal advice independently.
+    </div>`;
+  }
+
+  if(fr==='yes'){
+    html+=mkStep(n++,'fraud','Fraud pre-check &mdash; complete this before contacting Legal','The Fraud team collects and preserves fraud-specific evidence. Do not escalate to Legal without their input where fraud is suspected.',getFraudItems());
+  }
+
+  html+=mkStep(n++,'gen',
+    'General requirements',
+    'All items below must be completed before submitting an escalation. Incomplete submissions will be returned.',
+    [
+      {id:'g1',l:'Confirm this is a legal matter (see Section 1.1 &mdash; Is This a Legal Matter?)',
+        why:'Do not escalate operational questions, platform access issues, payment processing delays, or general policy queries to Legal. Direct those to Community Support or Operations.',
+        good:'You can clearly explain in one sentence why this is a legal matter and not an operational issue.',
+        bad:'Your instinct is that it is probably legal but you have not verified it against the case type definitions.'},
+      {id:'g2',l:'State specifically what you need Legal to do',
+        why:'Escalations with no stated request will be returned.',
+        good:'"Review and approve the non-payment notice before it is sent." / "Advise on responding to the TWC complaint." / "Draft a release of claims for a settlement."',
+        bad:'"Please handle this." / "Let me know your thoughts." / "Escalating for your awareness." These will be returned.'},
+      {id:'g3',l:'Avoid long, bulky email threads',
+        why:"Summarise key events in a concise narrative within the escalation email. Attach supporting documents separately &mdash; do not forward full email chains.",
+        good:"A clear 2&ndash;4 sentence narrative in the email body with all supporting documents as separate named attachments.",
+        bad:"Forwarding the entire email history and expecting Legal to extract the relevant information."},
+      {id:'g4',l:'Include all necessary user information in a clear, readable format',
+        why:"Every escalation must include the worker's User Email, Contractor ID, and location/country. You may also include direct links to all related tickets (Jira, Dynamics, etc.) for quick reference.",
+        good:"The exact registered email on the platform, the Contractor ID, the location/country, and direct URLs to every related ticket.",
+        bad:"A name and a rough location. Names can be duplicated; a jurisdiction without a state is unactionable for U.S. workers."},
+      {id:'g5',l:'Attach ALL relevant documents',
+        why:"Include contracts, screenshots, payment records, communications, project briefs, SOW, and user activity reports. Attach files directly to the escalation email.",
+        good:"All documents saved as individually named files: contract_workerXYZ.pdf, payment_record_Q1.xlsx, screenshots.zip.",
+        bad:"You forward a 30-email thread and say 'see attached chain.' This will be returned."},
+      {id:'g6',l:'Verify your information before sending',
+        why:"Review your email against this checklist before sending.",
+        good:"Every field in the email template is completed and every attachment listed by filename is actually attached.",
+        bad:"You send quickly and Legal comes back requesting missing information."},
+      ...urgentProtocolItems,
+    ],
+    escapeHatch
+  );
+
+  if(pl==='internal'){
+    html+=mkStep(n++,'techa',
+      'Technical evidence &mdash; Path A: Project on Oneforma (internal platform)',
+      'Raise a Jira ticket with the Development team and request the following before escalating.',
+      [
+        {id:'t1',l:'Jira ticket raised with the Development team',
+          why:'The Development team are the only people who can pull raw system data from the Oneforma platform. Without a formal Jira ticket there is no audit trail of the evidence-gathering process.',
+          good:'Jira ticket created with title format: "Evidence Request &ndash; [Worker Name / Project ID] &ndash; [Date]". You have the ticket number.',
+          bad:'You ask a developer informally by Slack and they send you a screenshot. Not sufficient for a legal case file.'},
+        {id:'t2',l:'Time logs for the disputed period (specify exact date range; request raw logs)',
+          why:'Raw logs &mdash; not summaries &mdash; are required so Legal and potentially external parties can verify the data\'s authenticity.',
+          good:'A raw exported log file covering the exact disputed period, labelled with the worker ID and date range.',
+          bad:'A summary report or a screenshot of totals. Raw data is required.'},
+        {id:'t3',l:'Timestamp of last login and last platform activity',
+          why:'These timestamps establish when the worker was last active on the platform. Last login and last activity are not always the same.',
+          good:'Two specific timestamps: last successful login date/time, and the date/time of the last recorded platform action.',
+          bad:'A rough date like "sometime in March." Timestamps must be precise.'},
+        {id:'t4',l:'Full project activity record (tasks, submissions, status changes)',
+          why:'This is the complete audit trail of what the worker did on the project, used to verify whether work was completed to the required standard.',
+          good:'A complete activity export from the Development team covering the full project duration.',
+          bad:'A partial record covering only the dates you think are relevant. Legal may need the full picture.'},
+        {id:'t5',l:'Jira ticket number and Development team response attached to escalation email',
+          why:'Do not escalate until the technical data has been received and reviewed. The ticket number proves the request was made formally.',
+          good:'You have the ticket number and the Development team\'s written response or export, both ready to attach.',
+          bad:'You have the data but not the ticket number, or you escalated before the Development team responded.'},
+      ]
+    );
+  }
+
+  if(pl==='client'){
+    html+=mkStep(n++,'techb',
+      'Technical evidence &mdash; Path B: Project on client tools (external platform)',
+      'Collect user activity data directly from the client\'s platform before escalating.',
+      [
+        {id:'t1',l:'Login history, task logs, submission records, and audit trail exported from the client platform',
+          why:'Label exports clearly with worker ID and date range. On a client platform you pull this data yourself &mdash; there is no internal Dev team to request it from.',
+          good:'Clearly labelled exports: loginhistory_workerXYZ_Jan-Mar2026.csv, tasklog_workerXYZ.xlsx.',
+          bad:'A screenshot of a dashboard view. Downloadable data files are required.'},
+        {id:'t2',l:'If direct access is unavailable: request the data from the client and document the request',
+          why:'Record date, method, and contact name. Attach any responses received. An undocumented verbal request does not exist for legal purposes.',
+          good:'A written email to the client specifying the data needed, date range, and worker ID &mdash; with their response attached.',
+          bad:'You called someone at the client and they said they\'d look into it.'},
+        {id:'t3',l:'All exported records attached to the escalation email',
+          why:'All evidence must travel with the escalation as separate files. A shared folder link is not acceptable.',
+          good:'All data exports saved as named files, listed by filename in the email body, and attached.',
+          bad:'A link to a SharePoint folder. Legal cannot guarantee the folder contents won\'t change after filing.'},
+      ]
+    );
+  }
+
+  if(ct==='nonpayment'){
+    html+=mkStep(n++,'pay',
+      'Payment verification',
+      'Required for any case involving a payment dispute. Complete this before escalating.',
+      [
+        {id:'p1',l:'Cross-check payment details with the Head of Community Support or Community Support Team Lead',
+          why:'Provide: worker/vendor name, project ID, payment period, and disputed amount or transaction. You need independent verification before Legal gets involved.',
+          good:'You have spoken with Anya Vlasenko or Andrijana Rovinac and they have confirmed the payment record against the worker\'s claim.',
+          bad:'You are relying on your own records without cross-checking. Your records and the authoritative payment record may differ.'},
+        {id:'p2',l:'Obtain written confirmation of the verified payment data',
+          why:'Attach the confirmation to the escalation email. Verbal confirmation is not enough. Legal needs a written record as part of the case file.',
+          good:'An email from Anya or Andrijana confirming the verified amounts, dates, and any discrepancies found.',
+          bad:'You spoke on the phone and made a note. A note you wrote yourself is not independent written confirmation.'},
+        {id:'p3',l:'Note any discrepancies between your records and verified data',
+          why:'Flag these clearly in the escalation email. Flagging discrepancies now prevents Legal discovering them mid-case and having to come back to you.',
+          good:'"Verified data shows $480 paid on 15 March. Worker claims $500 was owed. Discrepancy of $20 &mdash; reason unknown."',
+          bad:'You note there are "some differences" without specifying what they are.'},
+      ]
+    );
+  }
+
+
+  html+=mkStep(n++,'send',
+    'Ready to send? &mdash; Final check',
+    'Review your email against this checklist before sending. A returned escalation costs far more time than a careful final check.',
+    [
+      {id:'s1',l:'Subject line: [ESCALATION] &ndash; Case Type &ndash; Worker/Client Name &ndash; YYYY-MM-DD',
+        why:'Legal uses the subject line to log, categorise, and track escalations. An incorrect subject means the case may not be logged correctly.',
+        good:'[ESCALATION] &ndash; '+LABELS[ct]+' &ndash; Worker or Client Name &ndash; '+new Date().toISOString().split('T')[0],
+        bad:'"Re: Issue with worker" / "FYI" / "Urgent" / blank subject'},
+      {id:'s2',l:'Sending to legal@centific.com with judy.huang@centific.com in CC',
+        why:'The Legal inbox is the formal record of all escalations. Judy Huang is copied for oversight. Sending to an individual only breaks the audit trail.',
+        good:'legal@centific.com in the To field. judy.huang@centific.com in CC.',
+        bad:'Sending directly to a lawyer you have worked with before, without copying the Legal inbox.'},
+      {id:'s3',l:'All attachments listed by filename in the email body',
+        why:'Listing by filename forces you to confirm every document is actually attached and gives Legal a manifest to check against.',
+        good:'"Attachments: contract_workerXYZ.pdf &middot; jira_timelogs.xlsx &middot; payment_confirm_anya.eml"',
+        bad:'"Please see attached documents" with no list. If one fails to attach, neither you nor Legal will notice immediately.'},
+      {id:'s4',l:'A copy of the sent email and all attachments retained for your records',
+        why:'You need a record of exactly what you sent and when. Your sent folder alone may not preserve attachments reliably over time.',
+        good:'Email saved as PDF and attachments copied to a labelled case folder.',
+        bad:'Relying on your email sent folder only.'},
+    ]
+  );
+
+  document.getElementById('cl-body').innerHTML=html;
+  refreshOverall();
+}
+
+function goTemplate(){buildTemplate();nav('s-template');}
+
+function buildTemplate(){
+  const ct=ST.caseType,pl=ST.platform,fr=ST.fraud;
+  document.getElementById('tpl-subject').textContent='[ESCALATION] \u2013 '+LABELS[ct]+' \u2013 Worker/Client Name \u2013 '+new Date().toISOString().split('T')[0];
+  const rows=[
+    ['Submitted by','Full name, job title, team',true],
+    ['Date',new Date().toLocaleDateString('en-GB'),false],
+    ['Urgency','Standard \u00b7 Urgent \u00b7 Critical \u2014 delete as appropriate',true],
+    ['Case type',LABELS[ct],false],
+    ['SLA',SLAS[ct],false],
+    ['Party involved','Full name or client name',true],
+    ['User email','Worker\'s registered email address',true],
+    ['User location','For U.S.: specific state. For non-U.S.: country.',true],
+    ['Contractor ID','Worker\'s Contractor ID',true],
+    ['Related tickets','Links to all related tickets (Jira, Dynamics, etc.)',true],
+    ['Project / programme','Project name and ID',true],
+    ['Worker notified?','Yes \u00b7 No \u00b7 Pending',true],
+    ['Description of issue','Two to four sentences: what happened, who is involved, and why Legal involvement is needed.',true],
+    ['Summary of events','Concise chronology \u2014 bullet points or short paragraphs. Key dates and actions only.',true],
+    ['Technical evidence',pl==='internal'?'Local project \u2013 Jira ticket no.: ____':pl==='client'?'Client-tool project \u2013 confirm exports attached':'N/A',false],
+    ['Payment verification',ct==='nonpayment'?'Confirmed with [name] on [date]. Discrepancies (if any): ____':'N/A',false],
+    ['Fraud team input',fr==='yes'?'Reported to Fraud TL on [date]; findings attached':'N/A',false],
+    ['DPO (data privacy)',ct==='dsar'?'CC: data_protection@centific.com and v_julia.bacaria@centific.com on your escalation email':'N/A',false],
+    ['Requested action','State specifically what you need Legal to do. Examples: "Review and approve the non-payment notice." / "Advise on responding to the TWC complaint." / "Draft a release of claims." Vague requests will be returned.',true],
+    ['Attachments','List every attached file by name. E.g.: contract_workerXYZ.pdf, jira_timelogs.xlsx',true],
+  ];
+  document.getElementById('tpl-fields').innerHTML=rows.map(r=>`<div class="tpl-row"><div class="tpl-lbl">${r[0]}</div><div class="tpl-val${r[2]?'':' prefilled'}">${r[1]}</div></div>`).join('');
+}
+
+renderBc();
+</script>
+</body>
+</html>
